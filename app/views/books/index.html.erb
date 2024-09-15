@@ -1,5 +1,5 @@
  <%if @book.present? && @book.errors.any? %>
-  <%= @book.errors.count %>件のエラーが発生しました
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
   <ul>
     <% @book.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -27,7 +27,7 @@
   <tbody>
 <% @books.each do |book| %>
   <tr>
-    <td><%= image_tag book.user.profile_image, size: '100x100' %></td>
+    <td><a href="<%= user_path(book.user) %>"><%= image_tag(book.user.profile_image, size: '100x100') %></a></td>
     <td><%= link_to book.title, book_path(book.id) %></td>
     <td><%= book.body %></td>
 <% end %>

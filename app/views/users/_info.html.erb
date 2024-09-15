@@ -1,5 +1,16 @@
 <h1>User info</h1>
+
+ <%if @user.present? && @user.errors.any? %>
+  <%= @user.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= image_tag @user.get_profile_image(100,100) %>
+<div class="table-responsive">
 <table class="table">
  <tbody>
 <tr></tr>
@@ -7,6 +18,9 @@
 <tr><th>introduction</th><th><%= @user.introduction %></th></tr>
  </tbody>
 </table>
-<% if @user == current_user %>
- <p><%= link_to "edit", edit_user_path(@user) %></p>
-<% end %>
+</div>
+<div class="row">
+  <%= link_to edit_user_path(@user), class: 'btn btn-outline-secondary btn-block' do %>
+    <i class="fa fa-solid fa-user-gear"></i>
+  <% end %>
+</div>
