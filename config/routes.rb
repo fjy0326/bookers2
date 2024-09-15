@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :show, :edit, :update, :index, :show]
   resources :books, only: [:new, :create, :edit, :update, :destroy, :index, :show]
 
-  get 'homes/about' => 'homes#about', as: 'about'
+  get 'home/about' => 'homes#about', as: 'about'
   get 'books' => 'books#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
