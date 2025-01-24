@@ -47,9 +47,10 @@ class BooksController < ApplicationController
     @user = User.find(current_user.id)
   end
   
+  
   def show
     @book = Book.find(params[:id])
-    @user = @post.user.page(params[:page])
+    @user = @book.user
   end
 
 private

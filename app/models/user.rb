@@ -6,7 +6,7 @@ class User < ApplicationRecord
          
          
   has_many :books, dependent: :destroy
-  
+  has_many :favorites, dependent: :destroy
    has_one_attached :profile_image
   
   validates :name, uniqueness: true, length: { within: 2..20 }
@@ -18,6 +18,19 @@ class User < ApplicationRecord
     profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
   end
   profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  GUEST_USER_EMAIL = "guest@example.com"
+
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
+  
+  def guest_user?
+    email == GUEST_USER_EMAIL
   end
   
 end
