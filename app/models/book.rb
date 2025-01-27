@@ -15,6 +15,12 @@ class Book < ApplicationRecord
     image
   end
   
+  after_create do
+    user.followers.each do |follower|
+      notifications.create(user_id: follower.id)
+    end
+  end  
+  
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
