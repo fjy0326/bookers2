@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
   
   post 'users/:id' => 'users#update', as: 'update_user'
-  resources :users, only: [:create, :show, :edit, :update, :index, :show]
+  resources :users, only: [:create, :show, :edit, :update, :index, :show ,:destroy] do
+    resource :relationships, only: [:create, :destroy]
+  end
   resources :books, only: [:new, :create, :edit, :update, :destroy, :index, :show] do
     resource :favorite, only: [:create, :destroy]
   end
